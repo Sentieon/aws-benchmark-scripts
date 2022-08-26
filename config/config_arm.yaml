@@ -1,0 +1,63 @@
+---
+  input:
+    samples:
+      Element_HG002_100x:
+        - rg: "@RG\\tID:ElementBio-HG002-1\\tSM:HG002\\tPL:ELEMENT"
+          fq:
+            - xxx  # Downloaded from https://go.elementbiosciences.com/access-seq-datasets-060622
+            - xxx  # Downloaded from https://go.elementbiosciences.com/access-seq-datasets-060622
+      Illumina_HG002_HiSeqX_40x:
+        - rg: "@RG\\tID:Illumina-HiSeqX-HG002-1\\tSM:HG002\\tPL:ILLUMINA"
+          fq:
+            - https://s3.amazonaws.com/genomics-benchmark-datasets/google-brain/fastq/hiseqx/wgs_pcr_free/40x/HG002.hiseqx.pcr-free.40x.R1.fastq.gz
+            - https://s3.amazonaws.com/genomics-benchmark-datasets/google-brain/fastq/hiseqx/wgs_pcr_free/40x/HG002.hiseqx.pcr-free.40x.R2.fastq.gz
+      Illumina_HG002_NovaSeq_40x:
+        - rg: "@RG\\tID:Illumina-NovaSeq-HG002-1\\tSM:HG002\\tPL:ILLUMINA"
+          fq:
+            - https://s3.amazonaws.com/genomics-benchmark-datasets/google-brain/fastq/novaseq/wgs_pcr_free/40x/HG002.novaseq.pcr-free.40x.R1.fastq.gz
+            - https://s3.amazonaws.com/genomics-benchmark-datasets/google-brain/fastq/novaseq/wgs_pcr_free/40x/HG002.novaseq.pcr-free.40x.R2.fastq.gz
+      PacBio_HG002_HiFi_Chem2:
+        - rg: "@RG\\tID:PB-HiFi-Chem2-HG002-1\\tSM:HG002\\tPL:PACBIO"
+          fq:
+            - "https://s3.amazonaws.com/giab/data/AshkenazimTrio/HG002_NA24385_son/PacBio_CCS_15kb_20kb_chemistry2/reads/m64011_190830_220126.fastq.gz"
+        - rg: "@RG\\tID:PB-HiFi-Chem2-HG002-2\\tSM:HG002\\tPL:PACBIO"
+          fq:
+            - "https://s3.amazonaws.com/giab/data/AshkenazimTrio/HG002_NA24385_son/PacBio_CCS_15kb_20kb_chemistry2/reads/m64011_190901_095311.fastq.gz"
+        - rg: "@RG\\tID:PB-HiFi-Chem2-HG002-3\\tSM:HG002\\tPL:PACBIO"
+          fq:
+            - "https://s3.amazonaws.com/giab/data/AshkenazimTrio/HG002_NA24385_son/PacBio_CCS_15kb_20kb_chemistry2/reads/m64012_190920_173625.fastq.gz"
+        - rg: "@RG\\tID:PB-HiFi-Chem2-HG002-4\\tSM:HG002\\tPL:PACBIO"
+          fq:
+            - "https://s3.amazonaws.com/giab/data/AshkenazimTrio/HG002_NA24385_son/PacBio_CCS_15kb_20kb_chemistry2/reads/m64012_190921_234837.fastq.gz"
+        - rg: "@RG\\tID:PB-HiFi-Chem2-HG002-5\\tSM:HG002\\tPL:PACBIO"
+          fq:
+            - "https://s3.amazonaws.com/giab/data/AshkenazimTrio/HG002_NA24385_son/PacBio_CCS_15kb_20kb_chemistry2/reads/m64015_190920_185703.fastq.gz"
+        - rg: "@RG\\tID:PB-HiFi-Chem2-HG002-6\\tSM:HG002\\tPL:PACBIO"
+          fq:
+            - "https://s3.amazonaws.com/giab/data/AshkenazimTrio/HG002_NA24385_son/PacBio_CCS_15kb_20kb_chemistry2/reads/m64015_190922_010918.fastq.gz"
+      Ultima_HG002_cram:
+        url: https://s3.amazonaws.com/ultima-selected-1k-genomes/crams/005401-UGAv3-1-CACATCCTGCATGTGAT.cram
+    known_sites:
+      dbsnp: https://s3.amazonaws.com/broad-references/hg38/v0/Homo_sapiens_assembly38.dbsnp138.vcf
+      mills: https://s3.amazonaws.com/broad-references/hg38/v0/Mills_and_1000G_gold_standard.indels.hg38.vcf.gz
+      known_indels: https://s3.amazonaws.com/broad-references/hg38/v0/Homo_sapiens_assembly38.known_indels.vcf.gz
+    dnascope_model:
+      Illumina: https://s3.amazonaws.com/sentieon-release/other/SentieonDNAscopeModel1.1.model
+      Element: https://s3.amazonaws.com/sentieon-release/other/SentieonDNAscopeModelElementBio0.3.model
+      Ultima: https://s3.amazonaws.com/sentieon-release/other/SentieonDNAscopeModelUltima0.4.model
+    dnascope_LR_package: https://s3.amazonaws.com/sentieon-release/other/DNAscopeHiFiBeta0.4.pipeline.tar.gz
+  params:
+    n_target_bases: 93000000000  # 30x at a 3.1GB genome
+  tools:
+    sentieon: /home/ec2-user/programs/release/arm-sentieon-genomics-202112.05/bin/sentieon
+    sentieon_old: /home/ec2-user/programs/release/arm-sentieon-genomics-202112.05/bin/sentieon
+    igzip: /home/ec2-user/programs/isa-l/isa-l-2.30.0/programs/igzip
+    seqtk: /home/ec2-user/programs/seqtk/seqtk/seqtk
+    pigz: /home/ec2-user/programs/pigz/pigz-2.7/pigz
+    bedtools: /home/ec2-user/programs/bedtools/2.30.0/bedtools
+    samtools: /home/ec2-user/programs/samtools/samtools-1.15.1/samtools
+    bcftools: /home/ec2-user/programs/bcftools/bcftools-1.15.1/bcftools
+    rtgtools: /home/ec2-user/programs/rtgtools/rtg-tools-3.12.1/rtg
+    conda: /home/ec2-user/miniconda3/bin/conda
+    python2: /home/ec2-user/miniconda2/bin/python
+    hap.py: /home/ec2-user/programs/happy/hap.py-install/bin/hap.py
